@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1431104380 source:c:\githubrepo\cppprimer\chapter 8\testfile\main.cpp
+	<iostream>
+	<fstream>
+	<string>
+	<vector>
+	"Sales_Data.h"
+
+1431105217 c:\githubrepo\cppprimer\chapter 8\testfile\sales_data.h
+	<iostream>
+
