@@ -1,0 +1,9 @@
+# Windows:
+*.zip
+*.o
+*.exe
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+test/
