@@ -2,6 +2,7 @@
 *.zip
 *.o
 *.exe
+*.c
 Thumbs.db
 ehthumbs.db
 Desktop.ini
