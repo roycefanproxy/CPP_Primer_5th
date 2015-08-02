@@ -7,4 +7,6 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 
+# Linux:
+*.out
 test/
