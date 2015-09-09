@@ -9,4 +9,5 @@ Desktop.ini
 
 # Linux:
 *.out
-test/
+*test*
+*~
