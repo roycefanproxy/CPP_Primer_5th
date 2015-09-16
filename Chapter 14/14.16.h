@@ -3,13 +3,16 @@
 #include <memory>
 #include <utility>
 #include <iostream>
+#include <cstring>
 
 class String;
 std::ostream& operator<<(std::ostream&, const String&);
+bool operator==(const String&, const String&);
 
 class String
 {
 	friend std::ostream& operator<<(std::ostream&, const String&);
+	friend bool operator==(const String& ls, const String& rs);
 public:
 	String() : first(nullptr), cap(nullptr) {}
 	String(const char*);
@@ -107,5 +110,11 @@ std::ostream& operator<<(std::ostream& os, const String& s)
 	os << s.first;
 	return os;
 }
+
+bool operator==(const String& ls, const String& rs)
+{
+	return strcmp(ls.first, rs.first) ? false : true;
+}
+
 
 #endif // _14_7_h_
