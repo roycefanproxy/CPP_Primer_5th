@@ -8,6 +8,7 @@
 class String;
 std::ostream& operator<<(std::ostream&, const String&);
 bool operator==(const String&, const String&);
+bool operator!=(const String&, const String&);
 
 class String
 {
@@ -114,6 +115,11 @@ std::ostream& operator<<(std::ostream& os, const String& s)
 bool operator==(const String& ls, const String& rs)
 {
 	return strcmp(ls.first, rs.first) ? false : true;
+}
+
+bool operator!=(const String& ls, const String& rs)
+{
+	return !(ls == rs);
 }
 
 
