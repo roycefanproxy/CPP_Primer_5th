@@ -1,5 +1,5 @@
-#ifndef _14_40_h_
-#define _13_40_h_
+#ifndef _14_26_h_
+#define _14_26_h_
 #include <string>
 #include <utility>
 #include <memory>
@@ -240,4 +240,4 @@ bool operator<=(const Strvec& lsv, const Strvec& rsv)
 	return !(rsv < lsv);
 }
 		
-#endif // 13_49_h_
+#endif // 14_26_h_

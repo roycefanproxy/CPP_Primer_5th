@@ -1,5 +1,5 @@
-#ifndef _14_7_h_
-#define _14_7_h_
+#ifndef _14_26_h_
+#define _14_26_h_
 #include <memory>
 #include <utility>
 #include <iostream>
@@ -163,4 +163,4 @@ bool operator>(const String& ls, const String& rs)
 	return rs < ls;
 }
 
-#endif // _14_7_h_
+#endif // _14_26_h_
