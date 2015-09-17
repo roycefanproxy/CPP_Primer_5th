@@ -12,9 +12,9 @@ public:
 
 		std::getline(is, input);
 		if(!is)
-			input = std::string();
+			input = std::string("");
 		return input;
 	}
-}
+};
 
 #endif // _14_35_h_
