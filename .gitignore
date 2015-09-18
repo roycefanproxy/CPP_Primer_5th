@@ -1,3 +1,8 @@
+# Ignore vim editing file
+*.~
+*.~
+.*~
+
 # Windows:
 *.zip
 *.o
