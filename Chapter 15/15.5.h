@@ -28,7 +28,7 @@ class Bulk_Quote : public Quote
 public:
 	Bulk_Quote() = default;
 	Bulk_Quote(const std::string& book, const double& sale_price, size_t dis_qty, const double& disc) 		: Quote(book, sale_price), min_qty(dis_qty), discount(disc) {}
-	double net_price(size_t) const override;
+	double net_price(size_t) const override final;
 private:
 	size_t min_qty = 0;
 	double discount = 0.0;
