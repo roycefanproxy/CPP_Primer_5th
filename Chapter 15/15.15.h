@@ -23,6 +23,7 @@ public:
 	Disc_Quote() = default;
 	Disc_Quote(const std::string& s, const double& sale_price, size_t qty, const double& disc)
 		: Quote(s, sale_price), min_qty(qty), discount(disc) {}
+	~Disc_Quote() = default;
 	virtual double net_price(size_t n) const override = 0;
 protected:
 	double discount = 0.0;
@@ -35,6 +36,7 @@ public:
 	Bulk_Quote() = default;
 	Bulk_Quote(const std::string& s, const double& sale_price, size_t qty, const double& disc)
 		: Disc_Quote(s, sale_price, qty, disc) {}
+	~Bulk_Quote() = default;
 	double net_price(size_t n) const override
 	{
 		return price * n * (n > min_qty ? 1 - discount : 1);
