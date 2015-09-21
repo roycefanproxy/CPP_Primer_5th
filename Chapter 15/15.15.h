@@ -8,7 +8,7 @@ class Quote
 public:
 	Quote() = default;
 	Quote(const std::string& s, const double& sale_price) : bookNo(s), price(sale_price) {}
-	~Quote() = default;
+	virtual ~Quote() = default;
 	std::string isbn() const { return bookNo; }
 	virtual double net_price(size_t n) const { return price * n; }
 private:

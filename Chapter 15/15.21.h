@@ -15,7 +15,7 @@ public:
 	Shape() = default;
 	Shape(const std::string& s, const double& b, const double& w, const double& h)
 		: name_obj(s), length(b), width(w), height(h) {}
-	~Shape() = default;
+	virtual ~Shape() = default;
 	virtual double surf_area() const = 0;
 	virtual double volume() const = 0;
 	std::string name() const { return name_obj; }
