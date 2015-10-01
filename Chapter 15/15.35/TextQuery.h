@@ -7,6 +7,8 @@
 #include <set>
 #include <memory>
 #include <vector>
+#include <algorithm>
+#include <cctype>
 
 class QueryResult;
 
@@ -25,6 +27,7 @@ private:
 class QueryResult
 {
 	friend QueryResult TextQuery::query(const std::string&) const;
+	friend std::ostream& operator<<(std::ostream&, const QueryResult&);
 private:
 	typedef TextQuery::line_no line_no;
 	QueryResult(const std::string& s,
@@ -36,7 +39,7 @@ private:
 	std::shared_ptr<std::set<line_no>> indices;
 };
 
-TextQuery::TextQuery(std::istream& is)
+TextQuery::TextQuery(std::istream& is) : content(new std::vector<std::string>)
 {
 	std::string line;
 	line_no index = 0;
@@ -45,6 +48,7 @@ TextQuery::TextQuery(std::istream& is)
 		std::stringstream words(line);
 		std::string word;
 
+		content->push_back(line);
 		while(words >> word)
 		{
 			auto& pos = dictionary[word];
@@ -54,16 +58,27 @@ TextQuery::TextQuery(std::istream& is)
 		}
 		++index;
 	}
+
 }
 
 QueryResult TextQuery::query(const std::string& s) const
 {
-	static QueryResult null_val(s, nullptr, nullptr);
+	static QueryResult null_val(s, content, std::make_shared<std::set<line_no>>());
 	auto loc = dictionary.find(s);
 	if(loc != dictionary.end())
 		return QueryResult(s, content, loc->second);
 	else
 		return null_val;
+}
+
+std::ostream& operator<<(std::ostream& os, const QueryResult& qr)
+{
+	os << qr.word << " occurs " << qr.indices->size() 
+	   << (qr.indices->size() > 1 ? " times" : " time") << '.' << std::endl;
+	for(auto& itr : *qr.indices)
+		os << "\t(line " << itr + 1 << ") " << qr.content->at(itr)
+		   << std::endl;
+	return os;
 }
 
 #endif // _TextQuery_h_

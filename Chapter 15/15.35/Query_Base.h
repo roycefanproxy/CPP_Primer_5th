@@ -2,6 +2,7 @@
 #define _Query_Base_h_
 #include <memory>
 #include <string>
+#include "TextQuery.h"
 
 //	This is only an abstract class.
 class  Query_Base
