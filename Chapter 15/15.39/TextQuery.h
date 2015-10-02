@@ -23,12 +23,21 @@ private:
 
 class QueryResult
 {
-	friend std::ostream& print(std::ostream&, const QueryResult&);
+	friend std::ostream& operator<<(std::ostream&, const QueryResult&);
 public:
-	QueryResult(const std::string& s, std::shared_ptr<std::set<TextQuery::line_no>> set, std::shared_ptr<std::vector<std::string>> file) : word(s), indices(set), input(file) {}
+	using line_no = TextQuery::line_no;
+	QueryResult(const std::string& s, std::shared_ptr<std::set<line_no>> set,
+		    std::shared_ptr<std::vector<std::string>> file)
+			: word(s), indices(set), input(file) {}
+	std::set<line_no>::iterator begin() const { return indices->begin(); }
+	std::set<line_no>::iterator end() const { return indices->end(); }
+	std::shared_ptr<std::vector<std::string>> get_file() const
+	{
+		return input;
+	}
 private:
 	std::string word;
-	std::shared_ptr<std::set<TextQuery::line_no>> indices;
+	std::shared_ptr<std::set<line_no>> indices;
 	std::shared_ptr<std::vector<std::string>> input;
 };
 
@@ -56,7 +65,7 @@ QueryResult TextQuery::query(const std::string& s) const
 	else	return QueryResult(s, found->second, input);
 };
 
-std::ostream& print(std::ostream& os, const QueryResult& qr)
+std::ostream& operator<<(std::ostream& os, const QueryResult& qr)
 {
 	os << qr.word << " occurs " << qr.indices->size()
 	   << (qr.indices->size() > 1 ? " times" : " time") << std::endl;
