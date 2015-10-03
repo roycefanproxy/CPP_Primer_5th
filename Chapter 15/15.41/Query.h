@@ -23,7 +23,7 @@ public:
 				delete counter;
 			}
 			counter = q.counter;
-			++*counter;
+			std::cout << ++*counter << std::endl;;
 			query = q.query;
 		}
 		return *this;
@@ -39,7 +39,7 @@ public:
 	std::string rep() const { return query->rep(); }
 	QueryResult eval(const TextQuery& tq) const { return query->eval(tq); }
 private:
-	Query(Query_Base* qb) : query(qb) {}
+	Query(Query_Base* qb) : query(qb), counter(new int(1)) {}
 
 	Query_Base* query;
 	int* counter;

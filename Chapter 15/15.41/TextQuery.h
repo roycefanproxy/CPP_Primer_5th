@@ -25,7 +25,7 @@ public:
 private:
 	void free();
 	std::vector<std::string>* content;
-	std::map<std::string, std::set<line_no>*> dict;
+	std::map<std::string, std::set<line_no>*>* dict;
 	int* c_counter;
 };
 
@@ -35,6 +35,7 @@ class QueryResult
 	friend class TextQuery;
 public:
 	typedef TextQuery::line_no line_no;
+	~QueryResult() {}
 	std::set<line_no>::iterator begin() const { return indices->begin(); }
 	std::set<line_no>::iterator end() const { return indices->end(); }
 	std::vector<std::string>* get_file() const { return content; }
@@ -46,7 +47,7 @@ private:
 	std::set<line_no>* indices;
 };
 
-TextQuery::TextQuery(std::istream& is) : content(new std::vector<std::string>), c_counter(new int(1))
+TextQuery::TextQuery(std::istream& is) : content(new std::vector<std::string>), dict(new std::map<std::string, std::set<line_no>*>), c_counter(new int(1))
 {
 	std::string line;
 	line_no index = 0;
@@ -61,7 +62,7 @@ TextQuery::TextQuery(std::istream& is) : content(new std::vector<std::string>), 
 		while(words >> word)
 		{
 			filter(word);
-			auto& loc = dict[word];
+			auto& loc = (*dict)[word];
 			if(!loc) loc = new std::set<line_no>();
 			loc->insert(index);
 		}
@@ -78,6 +79,7 @@ void TextQuery::free()
 {
 	if(--*c_counter == 0)
 	{
+		delete dict;
 		delete content;
 		delete c_counter;
 	}
@@ -102,8 +104,8 @@ TextQuery::~TextQuery()
 
 QueryResult TextQuery::query(const std::string& s) const
 {
-	auto result = dict.find(s);
-	if(result != dict.end())
+	auto result = dict->find(s);
+	if(result != dict->end())
 		return QueryResult(s, content, result->second);
 	else
 		return QueryResult(s, content, new std::set<line_no>());

@@ -23,7 +23,7 @@ QueryResult OrQuery::eval(const TextQuery& tq) const
 
 inline Query operator|(const Query& ls, const Query& rs)
 {
-	return new OrQuery(ls, rs);
+	return Query(new OrQuery(ls, rs));
 }
 
 #endif // _OrQuery_h_
