@@ -1,6 +1,5 @@
 #ifndef _16_28_H_
 #define _16_28_H_
-#include <iostream>
 
 // generic default deleter
 template <typename T>
